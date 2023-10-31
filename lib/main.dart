@@ -14,18 +14,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (BuildContext context) {
-        GreatPlaces();
-      },
+      create: (context) => GreatPlaces(),
       child: MaterialApp(
         title: 'Great Places',
         theme: ThemeData(
           primarySwatch: Colors.indigo,
           hintColor: Colors.amber,
         ),
-        home: const PlacesListScreen(),
+        home: PlacesListScreen(),
         routes: {
-          AddPlaceScreen.routeName: (context) => const AddPlaceScreen()
+          AddPlaceScreen.routeName: (context) => const AddPlaceScreen(),
+          PlacesListScreen.routeName: (context) => const PlacesListScreen(),
         },
       ),
     );

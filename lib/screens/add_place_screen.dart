@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:native_features/provider/great_places.dart';
+import 'package:native_features/screens/places_list_screen.dart';
+import 'package:provider/provider.dart';
 
 import '../widget/image_input.dart';
 import 'dart:io';
@@ -16,8 +19,20 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
   final _titleController = TextEditingController();
   File? _imagePicked;
 
-  void _selectImage(File pickedImage) {
-    _imagePicked = pickedImage;
+  Future<File> _selectImage(File pickedImage) async {
+   return _imagePicked = pickedImage;
+  }
+
+  void _addSelectedImage(){
+    print("got to push replacement");
+
+    // if (_titleController.text.isEmpty || _imagePicked == null) {
+    //   return;
+    // }
+    print("got to push replacement>>>>>");
+    print("_imagePicked is $_imagePicked");
+    Provider.of<GreatPlaces>(context, listen: false).addLocation(_titleController.text, _imagePicked!);
+    Navigator.of(context).pushReplacementNamed(PlacesListScreen.routeName);
   }
 
   @override
@@ -51,9 +66,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
           ElevatedButton.icon(
             icon: const Icon(Icons.add),
             label: const Text('Add Place'),
-            onPressed: () {
-
-            },
+            onPressed: _addSelectedImage,
             // style: ,
           ),
         ],
